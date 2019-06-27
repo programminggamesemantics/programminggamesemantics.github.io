@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"><title>Programming game semantics</title>
+    <link rel="stylesheet" href="style.css">
+    <script charset="utf-8" type="text/javascript" src="./javascript/viz.js" ></script>
+    <script charset="utf-8" type="text/javascript" src="./javascript/full.js.opaque" ></script>
+    <script charset="utf-8" type="text/javascript" src="./javascript/draw.js" ></script>
+    <script charset="utf-8" type="text/javascript" src="./app.js" ></script>
+  </head>
+  <body>
+    <div id="content">
+    <header>
+      <h1 class="title">Programming game semantics</h1> 
+    </header>
+    <p>This webpage is an implementation of a translation from IPA, a
+      higher-order language with shared-memory concurrency to a
+      metalanguage, and an interpretation of that metalanguage in
+      terms of event structures</p>
+
+    <p>How it works: you can either:
+      <ul><li>Enter a term of IPA in the first textarea. Clicking the
+      button will translate the program to the metalanguage and
+          display the corresponding event structure.
+          </li><li>Enter a term of the metalanguage in the second
+          textarea. Clicking the button displays the corresponding event structure</li>
+        </ul>
+    
+    <h2>Accepted syntax: IPA</h2>
+    <p>The syntax follows that of the paper, with some adjustements:</p>
+    <pre>
+M ::=
+   fun x y ... -> M                                       { lambda abstraction }
+|  M N                                                    { application }
+|  x                                                      { variable }
+|  if M then N else N'                                    { conditional }
+|  true | false                                           { boolean }
+|  !M                                                     { dereferencement }
+|  M := N                                                 { assignment }
+|  new r in M                                             { reference allocation }
+|  M; N                                                   { sequential composition }
+|  M | N                                                  { parallel composition }
+    </pre>
+    <h2>Accepted syntax: Metalanguage</h2>
+    <p>The syntax follows that of the paper, with some adjustements:</p>
+    <pre>
+P ::=
+   (nu a b c ...) P                                         { restriction }
+|  a&label: P                                               { selection, one branch }
+|  a&{label1: P; label2: P}                                 { selection, many branches }
+|  a+label. P                                               { output of label }
+|  a{x, ..., z}. P                                          { split }
+|  P | Q                                                    { parallel composition }
+| a!(x). P                                                  { promotion (server) }
+| a?[x]. P                                                  { dereliction (client) }
+| a?{x, y}. P                                               { contraction (copy) }
+| a#(x). P                                                  { codereliction }
+    </pre>
+
+    <h2>Input code</h2>
+
+    <div id="error" style="display:none; background: #FFAAAA; margin: 10px; padding: 10px; border: 1px black">
+    </div>
+    <div>
+    IPA: <input type="submit" value="Compute interpretation" id="button_ipa"/>Load an example
+      <select id="ipa_examples">
+      </select><br/>
+    <textarea id="input_ipa" rows="8" style="margin: 2%; width:90%"></textarea>
+    </div>
+    <div>Metalnguage: <input type="submit" value="Compute interpretation" id="button_ml"/> Load an example
+      <select id="metalang_examples">
+      </select>
+      <br/>
+      <textarea id="input_ml" rows="8" style="margin: 2%; width:90%"></textarea>
+
+      <br />
+    <label><input id="see_intern" value="0" type="checkbox" /> Display internal moves</label>
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    &nbsp;
+    <label>Number of copies: <input id="nb_copies" type="text" value="2" /></label>
+    <div id="drawing">
+      Results:
+    </div>
+    </div>
+    </div>
+
+  </body>
+</html>

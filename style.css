@@ -1,0 +1,80 @@
+/* Stylesheet for the Wiki
+ Based on the lighttpd default page in debian */
+
+/* General body */
+
+body { 
+    font-size: 11pt; 
+    background: #e7e7e7;
+}
+
+#content, .page { 
+    background: #ffffff; 
+    margin: auto; 
+    border: 2px solid #c0c0c0; 
+    padding: 10px;
+    max-width: 80em;
+}
+
+.languages {
+    text-align: right;
+}
+.title, .pageheader {
+    background: #4b6983; 
+    border: 2px solid #7590ae; 
+    text-align: center; 
+    padding: 10px; 
+    color: #ffffff;
+}
+
+.error {
+    background-color: #ff0000;
+    color: #ffaaaa;
+    font-weight: bold;
+}
+
+.center {
+    text-align: center;
+}
+/* Header */
+.percentage { font-size: small; }
+
+a {
+    color: blue;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.pageheader a {
+    color: #c09797;
+}
+.actions {
+    text-align: right;
+}
+.actions ul { border: none; }
+.pageheader #otherlanguages {
+    display: inline;
+    border-bottom: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.pageheader #otherlanguages ul {     
+    margin: 0px;
+    padding: 0px;
+    border-bottom: 12px;
+    list-style-type: none; 
+}
+#otherlanguages ul li { display: inline; }
+
+.theorem:before {
+    font-weight: bold;
+    content: attr(data-kind) " " attr(data-number) "." attr(data-title);
+}
+
+.theorem {
+    font-variant: italic;
+}
