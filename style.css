@@ -78,3 +78,7 @@ a:hover {
 .theorem {
     font-variant: italic;
 }
+
+select:invalid {
+    color: gray;
+}
