@@ -1,0 +1,154 @@
+/* Stylesheet for the Wiki
+ Based on the lighttpd default page in debian */
+
+/* General body */
+
+body {
+    background: #ffffff;
+    margin: 0px;
+}
+
+#content, .page { 
+    background: #ffffff; 
+    margin: auto;
+    margin-top: 0px;
+    padding: 10px;
+}
+
+@media all and (min-width: 65em) {
+    #content {
+        border-left: 2px solid #ffcc88;
+        border-right: 2px solid #ffcc88;
+    }
+}
+
+p {
+    text-align: justify;
+}
+
+#content {
+    max-width: 60em;
+    padding-left:1em;
+    padding-right:1em;
+}
+.languages {
+    text-align: right;
+}
+.title, .pageheader {
+    text-align: center; 
+    padding: 10px; 
+}
+
+.center {
+    text-align: center;
+}
+/* Header */
+.percentage { font-size: small; }
+
+a {
+    color: blue;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.pageheader a {
+    color: #c09797;
+}
+.actions {
+    text-align: right;
+}
+.actions ul { border: none; }
+.pageheader #otherlanguages {
+    display: inline;
+    border-bottom: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+.pageheader #otherlanguages ul {     
+    margin: 0px;
+    padding: 0px;
+    border-bottom: 12px;
+    list-style-type: none; 
+}
+#otherlanguages ul li { display: inline; }
+
+.theorem:before {
+    font-weight: bold;
+    content: attr(data-kind) " " attr(data-number) "." attr(data-title);
+}
+
+.theorem {
+    font-variant: italic;
+}
+select:invalid {
+    color: gray;
+}
+
+#centerpoint {
+    top: 50%;
+    left: 50%;
+    position: fixed;
+}
+
+#interface_ask_string {
+    position: relative;
+
+    width: 40em;
+    margin-left: -20em;
+    margin-top:-1em;
+
+    
+    background-color:gray;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 1.5em;
+    padding: 1em;
+}
+
+.action {
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+}
+
+.action:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-style: solid;
+}
+
+.program {
+    fill: #bbffbb;
+    cursor: pointer;
+}
+
+.program > text {
+    fill: #004400;
+}
+
+.internal {
+    fill: #999999;
+}
+.internal > text {
+    fill: #000000;
+}
+.context {
+    fill: #ffbbbb;
+}
+.context > text {
+    fill: #440000;
+}
+
+.selected > polygon {
+    stroke-dasharray: 5;
+    stroke-linecap: round;
+    stroke: black;
+}
+
+.highlight > polygon {
+    stroke: blue;
+}

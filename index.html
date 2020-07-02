@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"><title>Programming game semantics: Concurrent MiniML</title>
+    <link rel="stylesheet" href="style.css">
+    <script charset="utf-8" type="text/javascript" src="viz.js" ></script>
+    <script charset="utf-8" type="text/javascript" src="full.js.opaque" ></script>
+    <script charset="utf-8" type="text/javascript" src="draw.js" ></script>
+    <script charset="utf-8" type="text/javascript" src="app.bc.js" ></script>
+  </head>
+  <body>
+    <div id="centerpoint">
+      <div id="interface_ask_string" style="display:none">
+        <label><span id="interface_prompt"></span>
+          <input type="text" id="interface_input" />
+          <input type="submit" value="go" id="interface_button" />
+        </label>
+      </div>
+    </div>
+    <div id="content">
+      <header>
+        <h1 class="title">Programming game semantics: Concurrent MiniOCaml</h1> 
+      </header>
+      <p>This webpage is an implementation of a translation from
+        Concurrent Mini-OCaml to event structures. In the textarea
+        below, you can enter some concurrent OCaml code and explore
+        the resulting event structure.
+
+        <ul>
+          <li><b>Supported OCaml constructs</b>: All the functional
+          part (functions, sum types, products, records). No
+          named/optional arguments. For datatypes, only integers,
+          strings and sum types. (In particular: no float). There is
+          no polymorphism support: please constraint the types of your
+          term to ensure that there are no universal quantification.
+          </li>
+          <li><b>Functions available</b>: The OCaml code is interpreted
+          without access to any of the standard library
+            (even <tt>Pervasives</tt>). We provide the following "standard library"
+            <pre>
+              (* Type of integer references *)
+              type var = {get: unit -> int; set: int -> unit} 
+
+              (* Create a reference *)
+              val var : string -> int -> var
+
+              (* Spawns a computation, returns a waiter function: [spawn
+              f] spawns [f()] in the background which returns when the
+              call to f does. *)
+              val spawn : (unit -> 'a) -> unit -> 'a
+
+              (* Reference access *)
+              val ( ! ) : var -> int
+              val ( := ) : var -> int -> unit
+
+              (* Computation that never converges *)
+              val bottom : unit -> 'a
+</pre>
+        </ul>
+      </p>
+      <p>The semantics is different from the usual OCaml
+      semantics. Everything that can be evaluated in parallel will be
+      evaluated in parallel (tuples, applications).</p>
+
+      <ul>
+        <li>Conflict is a blue dotted line.</li>
+        <li>Red events are Context events and green events Program
+          events; stars (*) are internal events</li>
+        <li><b>The event structure is computed incrementally:
+            Underlined text can be clicked to trigger the next step of
+            the computation.</b> More precisely, certain areas in
+          Player moves (in green) are underlined and can be clicked.
+          <ul>
+            <li>Program calls are underlined: This means the program
+            has call an external function. Clicking on <tt>Call</tt>
+              simulates the context terminating this function call.</li>
+            <li>Program closures using in return values or arguments
+            are also underlined. Clicking them simulates calling this
+            closure.</li></ul>
+        </li>
+        </ul>
+        <hr />
+      <h2>Input code <select required id="ipa_examples"><option value="" disabled selected hidden>Load an example</option></select></h2>
+      <div style="display:inline-block; margin-right:20px; width: 100%">
+        <br/>
+        <textarea id="input_ipa" rows="8" style="margin-right: 1em;width:100%"></textarea>
+        <br />
+        <input type="submit" value="Compute interpretation" id="button_ipa"/>
+        <div id="error" style="display:none; background: #FFAAAA; margin: 10px; padding: 10px; border: 1px black">
+        </div>
+        <div id="static_analysis" style="margin: 10px; padding: 10px; border: 1px black">
+        </div>
+      </div>
+      <div id="drawing">
+        Results:
+      </div>
+    </div>
+
+  </body>
+</html>
