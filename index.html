@@ -79,6 +79,22 @@
             closure.</li></ul>
         </li>
         </ul>
+Note that this is only a prototype. A few remarks:
+<ul>
+<li>This has only been tested with Chromium and Firefox</li>
+<li>When using types on the interface which are not simple (product,
+arrow, constants), then the interface to provide arguments might not
+function as intended, in particular it might ask you to enter a
+complete value of that type, instead of a constructor (as in the sense
+of the submission).</li>
+
+<li>It is possible to use polymorphic functions, but the same problem applies: the interface to input values will work but ignore the type</li>
+<li>There might be stack overflows in the examples with
+references. This is hard to predict, and when having stack overflows,
+it might be necessary to try again or even to reopen the tabs. It
+seems to work better on Chromium.</li>
+</ul>
+
         <hr />
       <h2>Input code <select required id="ipa_examples"><option value="" disabled selected hidden>Load an example</option></select></h2>
       <div style="display:inline-block; margin-right:20px; width: 100%">
